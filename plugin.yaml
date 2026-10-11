@@ -1,0 +1,44 @@
+# Hermes 0.21.0's `hermes plugins install` refuses manifest_version above 1.
+# The loader still reads python_dependencies, license and homepage at version 1.
+manifest_version: 1
+name: agentguard-spend
+version: 0.4.0
+description: Local spend caps, tool guards, sub-agent limits and signed decisions for Hermes Agent.
+author: Dunecrest Ventures Inc.
+kind: standalone
+requires_hermes: ">=0.16.0"
+provides_middleware:
+  - llm_request
+  - llm_execution
+  - tool_execution
+provides_hooks: [pre_approval_request, post_approval_response, pre_auxiliary_call, post_auxiliary_call]
+commands: [agentguard]
+provides_tools: []
+requires_env:
+  - name: HOME
+    required: false
+  - name: HERMES_HOME
+    required: false
+  - name: HERMES_SESSION_KEY
+    required: false
+  - name: HERMES_SESSION_ID
+    required: false
+  - name: HERMES_PLUGIN_HOST_PROCESS
+    required: false
+  - name: AGENTGUARD_DISABLE
+    required: false
+  - name: AGENTGUARD_HOME
+    required: false
+  - name: AGENTGUARD_LOCALE
+    required: false
+  - name: LC_ALL
+    required: false
+  - name: LC_MESSAGES
+    required: false
+  - name: LANG
+    required: false
+python_dependencies:
+  - agentguard-spend>=0.16.0,<0.17
+  - pyyaml>=6,<7
+license: BUSL-1.1
+homepage: https://agentguard.run

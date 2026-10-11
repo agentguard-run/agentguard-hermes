@@ -1,0 +1,7 @@
+{
+  "name": "agentguard-spend",
+  "label": "AgentGuard",
+  "description": "Read-only local spend and helper status",
+  "version": "0.3.0",
+  "api": "plugin_api.py"
+}

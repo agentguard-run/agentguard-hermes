@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentguard-spend-hermes"
+version = "0.4.0"
+description = "AgentGuard for Hermes Agent: local spend caps, tool guards, sub-agent limits and signed decisions."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Dunecrest Ventures Inc.", email = "hello@agentguard.run" }]
+keywords = [
+    "hermes",
+    "hermes-agent",
+    "nous-research",
+    "agentguard",
+    "ai-agent-security",
+    "spend-control",
+    "llm-governance",
+    "agent-plugin",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    # 0.16.0 is the first SDK release with agentguard_spend.guards. Keep the
+    # upper bound at the following minor release, here and in plugin.yaml.
+    "agentguard-spend>=0.16.0,<0.17",
+    "pyyaml>=6,<7",
+]
+
+[project.urls]
+Homepage = "https://agentguard.run"
+"AgentGuard SDK (PyPI)" = "https://pypi.org/project/agentguard-spend/"
+"AgentGuard SDK (npm)" = "https://www.npmjs.com/package/@agentguard-run/spend"
+"Hermes Agent" = "https://github.com/NousResearch/hermes-agent"
+"Source" = "https://github.com/agentguard-run/agentguard-hermes"
+
+# Hermes plugin auto-discovery entry point.
+# When agentguard-spend-hermes is pip-installed in the same Python
+# environment as Hermes Agent, Hermes's plugin manager loads this entry
+# point and then looks up `register` on what it loaded, so the value must
+# name the module, not the function. The operator must enable it.
+[project.entry-points."hermes_agent.plugins"]
+agentguard-spend = "agentguard_spend_hermes"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agentguard_spend_hermes"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.11", "hatchling>=1.18"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+# Pinned: ruff 0.16 widened its default rule set, so an unpinned check passes
+# or fails depending on the installed ruff release.
+select = ["E4", "E7", "E9", "F"]

@@ -1,0 +1,46 @@
+name: agentguard-spend
+repo: https://github.com/agentguard-run/agentguard-hermes
+sha: PLACEHOLDER
+subdir: ""
+title: AgentGuard for Hermes Agent
+version: "0.4.0"
+maintainer: MerchantGuardOps
+tier: community
+category: tools
+requires_hermes: ">=0.16.0"
+docs_url: https://github.com/agentguard-run/agentguard-hermes/blob/main/README.md
+readme: true
+platforms: [linux, macos]
+known_issues:
+  - The exact SHA is set at submission from the public repository.
+  - Auxiliary hooks observe but cannot veto calls; Hermes 0.21.0 does not emit them. codex_app_server bypasses the execution middleware.
+  - The Hermes 0.21.0 doctor rejects the two newer declared auxiliary hook names; runtime registration skips unsupported auxiliary hooks.
+  - Spend and helper counters reset with the Hermes process and are not shared between processes.
+  - Under plugin-host isolation unattended approvals deny and the Desktop chip reports unavailable live counters.
+capabilities:
+  provides_tools: []
+  provides_hooks: [pre_approval_request, post_approval_response, pre_auxiliary_call, post_auxiliary_call]
+  provides_middleware: [llm_request, llm_execution, tool_execution]
+  commands: [agentguard]
+  requires_env: [HOME, HERMES_HOME, HERMES_SESSION_KEY, HERMES_SESSION_ID, HERMES_PLUGIN_HOST_PROCESS, AGENTGUARD_DISABLE, AGENTGUARD_HOME, AGENTGUARD_LOCALE, LC_ALL, LC_MESSAGES, LANG]
+description: >-
+  Local price-aware spend caps, tool guards, helper limits and signed receipts.
+  Disclosure: the SDK rule pack quotes the commands it blocks and is unchanged.
+  The Python plugin makes no direct HTTP calls. Configured Hermes approval
+  transports can send content-free requests to their operator-selected push or
+  messaging service. Desktop reads the status route on the connected Hermes
+  gateway. Hermes calls its configured providers and tools; auxiliary hooks
+  observe but cannot veto calls. Optional SDK APIs, unused by the plugin, can contact
+  agentguard.run for license validation, seats, opted-in telemetry, managed keys
+  and consent verification; OpenRouter for model catalogs and key verification;
+  OpenRouter, OpenAI, Anthropic or a configured advisor endpoint for conversations;
+  configured workflow, provider, Redis, PostgreSQL, AWS KMS and Vault endpoints
+  when those features are explicitly used. The plugin reads local policy, keys,
+  receipts, SDK cost overrides, Hermes approval config and model caches; writes policy.yaml,
+  private.key, public.key, decisions.ndjson and decisions.lock under
+  HERMES_HOME/agentguard; reads only its own signing credential; executes no shell
+  commands and starts no background processes. Hermes owns transport state and
+  credentials; it invokes transports on bounded worker threads. Desktop polls
+  only while mounted. The optional SDK CLI dashboard
+  serves local data and can open a browser only when explicitly launched.
+  Full endpoints, optional SDK credentials and state files are in docs/catalog-disclosure.md.
