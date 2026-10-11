@@ -1,10 +1,8 @@
 # Catalog PR disclosure
 
-This is a draft for the assembled public repository. The SDK containing the public
-guards module must be released, its bounded dependency floor updated, the proposed
-repository destination confirmed, and the catalog SHA replaced before submission.
-No package version is changed here. Validation with a local editable SDK does not
-establish that dependency installation from the package index will succeed.
+What AgentGuard for Hermes Agent does at runtime, for catalog review. At 0.4.1,
+`hermes plugins validate --install-deps` passes every check on Hermes Agent
+v0.21.6, and the install security scan reports safe.
 
 ## Plugin runtime
 
@@ -116,16 +114,15 @@ not persistent child processes. No self-updater is present.
 
 ## Host API findings and limits
 
-Hermes 0.16.0 is the first shipped release with middleware. Local history places
-the API introduction at `2e0c9083db8425d6e087ba0af6024406aa513d05` and the first
-subsequent release at `3c231eb397`. JP's 0.21.0 has that API.
+Hermes 0.16.0 is the first release with middleware, so `requires_hermes` is
+`>=0.16.0`.
 
 Hermes 0.21.0 gives PyPI entry points precedence over directory copies. Latest
 Hermes gives an explicit directory copy precedence, so a stale directory can
 shadow a PyPI upgrade. Its installer also prepares dependencies transactionally
 and refuses a non-interactive active replacement without dependency consent.
-The offline 0.21.0 replacement smoke does not establish that this newer
-installation transaction works before the SDK guards release.
+On v0.21.6, `hermes plugins install agentguard-run/agentguard-hermes --yes-deps
+--enable` prepares the dependencies in that transaction and loads the plugin.
 
 On supported hosts the lockdown registers before SDK imports and stays closed
 on setup failure. If the middleware method is unexpectedly absent, there is no

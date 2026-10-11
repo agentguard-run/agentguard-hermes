@@ -23,11 +23,11 @@ hermes plugins enable agentguard-spend
 
 The PyPI entry point and a directory copy share the plugin name `agentguard-spend`. Latest Hermes gives an explicit directory copy precedence, so remove an outdated directory installation before relying on a PyPI upgrade. Hermes loads one winning copy.
 
-After a maintainer lists this plugin in the Hermes catalog, the catalog install path will be `hermes plugins install agentguard-spend`. It is not listed by this change. The draft entry is in `docs/catalog-entry.yaml`; its repository destination and SHA still need release review.
+Once a maintainer lists it in the Hermes catalog, it also installs with `hermes plugins install agentguard-spend`. The proposed entry is in `docs/catalog-entry.yaml`.
 
 The rule pack now ships in the SDK dependency. The plugin scan can still report caution findings for documented blocked operations and package-install instructions. These are disclosed for human review. No rule pattern was rewritten or hidden to change the scanner result.
 
-Hermes 0.21.0 displays declared Python dependencies without installing them. Latest Hermes prepares them as part of its installation transaction and requires consent to replace an active plugin. That path needs the released SDK containing the guards module. If a dependency is missing, or the policy or keys cannot be read on a supported host, AgentGuard registers a lockdown before setup, and a failed setup leaves it refusing every model call and every tool call with this message, also written to the log:
+Hermes 0.21.0 displays declared Python dependencies without installing them. Latest Hermes prepares them as part of its installation transaction and requires consent to replace an active plugin. If a dependency is missing, or the policy or keys cannot be read on a supported host, AgentGuard registers a lockdown before setup, and a failed setup leaves it refusing every model call and every tool call with this message, also written to the log:
 
 ```text
 AgentGuard setup failed: <reason>. Fix it, or set AGENTGUARD_DISABLE=1 to run without AgentGuard.

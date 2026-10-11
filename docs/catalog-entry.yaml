@@ -1,6 +1,6 @@
 name: agentguard-spend
 repo: https://github.com/agentguard-run/agentguard-hermes
-sha: PLACEHOLDER
+sha: PLACEHOLDER  # the submitted copy pins the reviewed commit
 subdir: ""
 title: AgentGuard for Hermes Agent
 version: "0.4.1"
@@ -12,7 +12,6 @@ docs_url: https://github.com/agentguard-run/agentguard-hermes/blob/main/README.m
 readme: true
 platforms: [linux, macos]
 known_issues:
-  - The exact SHA is set at submission from the public repository.
   - Auxiliary hooks observe but cannot veto calls; Hermes 0.21.0 does not emit them. codex_app_server bypasses the execution middleware.
   - The Hermes 0.21.0 doctor rejects the two newer declared auxiliary hook names; runtime registration skips unsupported auxiliary hooks.
   - Spend and helper counters reset with the Hermes process and are not shared between processes.
@@ -21,7 +20,6 @@ capabilities:
   provides_tools: []
   provides_hooks: [pre_approval_request, post_approval_response, pre_auxiliary_call, post_auxiliary_call]
   provides_middleware: [llm_request, llm_execution, tool_execution]
-  commands: [agentguard]
   requires_env: []
 description: >-
   Local price-aware spend caps, tool guards, helper limits and signed receipts.
