@@ -3,7 +3,7 @@ repo: https://github.com/agentguard-run/agentguard-hermes
 sha: PLACEHOLDER
 subdir: ""
 title: AgentGuard for Hermes Agent
-version: "0.4.0"
+version: "0.4.1"
 maintainer: MerchantGuardOps
 tier: community
 category: tools
@@ -22,7 +22,7 @@ capabilities:
   provides_hooks: [pre_approval_request, post_approval_response, pre_auxiliary_call, post_auxiliary_call]
   provides_middleware: [llm_request, llm_execution, tool_execution]
   commands: [agentguard]
-  requires_env: [HOME, HERMES_HOME, HERMES_SESSION_KEY, HERMES_SESSION_ID, HERMES_PLUGIN_HOST_PROCESS, AGENTGUARD_DISABLE, AGENTGUARD_HOME, AGENTGUARD_LOCALE, LC_ALL, LC_MESSAGES, LANG]
+  requires_env: []
 description: >-
   Local price-aware spend caps, tool guards, helper limits and signed receipts.
   Disclosure: the SDK rule pack quotes the commands it blocks and is unchanged.

@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 0.4.1 (2026-10-11)
+
+- Declare the environment variables the plugin reads as `optional_env`, so `hermes plugins install` no longer prompts for values Hermes sets itself, such as `HERMES_SESSION_KEY`.
+- Point the package Source link at the public repository, github.com/agentguard-run/agentguard-hermes.
+
 ## 0.4.0 (2026-10-11)
 
 - Install guidance for Hermes v0.21.6 and later, which run from a managed environment: install from the AgentGuard repository with `hermes plugins install`, or install the PyPI package into the managed environment. Requires agentguard-spend 0.16.0, the first release with `agentguard_spend.guards`.

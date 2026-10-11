@@ -68,7 +68,7 @@ _PRIVATE_KEY_FILENAME = "private.key"
 _PUBLIC_KEY_FILENAME = "public.key"
 _DECISIONS_FILENAME = "decisions.ndjson"
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 _POLICY_YAML_TEMPLATE = """\
 # AgentGuard Spend default policy (auto-generated on first install).

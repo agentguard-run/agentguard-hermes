@@ -40,7 +40,7 @@ On first load AgentGuard creates `agentguard/policy.yaml`, a signing keypair and
 The startup log identifies the active path:
 
 ```text
-AgentGuard 0.4.0: official middleware active (policy=...)
+AgentGuard 0.4.1: official middleware active (policy=...)
 ```
 
 Hermes 0.16.0 is the first released version with `register_middleware`; 0.21.0 qualifies. Client wrappers have been removed. On a supported host, setup failures leave the registered lockdown closed. If middleware is unavailable despite the version requirement, initialization stops with `AgentGuardMiddlewareRequired`, a fatal exception naming the required version. Without that API a plugin cannot register a model gate. Hermes catches ordinary exceptions and `SystemExit` and discards a failed plugin, so neither is used for this case. `AGENTGUARD_DISABLE=1` explicitly disables the plugin, including the lockdown. Hermes may skip plugins whose declared version floor is unmet; do not use an older host for protection.

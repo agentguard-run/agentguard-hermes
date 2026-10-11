@@ -2,7 +2,7 @@
 # The loader still reads python_dependencies, license and homepage at version 1.
 manifest_version: 1
 name: agentguard-spend
-version: 0.4.0
+version: 0.4.1
 description: Local spend caps, tool guards, sub-agent limits and signed decisions for Hermes Agent.
 author: Dunecrest Ventures Inc.
 kind: standalone
@@ -14,7 +14,8 @@ provides_middleware:
 provides_hooks: [pre_approval_request, post_approval_response, pre_auxiliary_call, post_auxiliary_call]
 commands: [agentguard]
 provides_tools: []
-requires_env:
+# Read when set, never required: Hermes prompts at install for every requires_env name.
+optional_env:
   - name: HOME
     required: false
   - name: HERMES_HOME
